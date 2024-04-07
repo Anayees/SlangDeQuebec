@@ -1,8 +1,13 @@
-package model;
+package com.example.slangdequebec.model;
 
+import com.example.slangdequebec.util.Gender;
+import com.example.slangdequebec.util.Origin;
+import com.example.slangdequebec.util.PartsOfSpeech;
+import com.example.slangdequebec.util.Usage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,31 +19,12 @@ public class Word {
 
     @Id
     private String id;
+    @NonNull
     private String word;
-    private String gender;
-    private String origin;
-    private String partsOfSpeech;
-    private String usage;
+    private Gender gender;
+    private Origin origin;
+    private PartsOfSpeech partsOfSpeech;
+    private Usage usage;
     private String definition;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Word{" +
-                "id=" + id +
-                ", word='" + word + '\'' +
-                ", gender=" + gender +
-                ", origin=" + origin +
-                ", partsOfSpeech=" + partsOfSpeech +
-                ", usage=" + usage +
-                ", definition='" + definition + '\'' +
-                '}';
-    }
 }
