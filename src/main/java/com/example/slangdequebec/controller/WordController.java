@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.WordService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,9 +20,18 @@ public class WordController {
     private WordService wordService;
 
     @GetMapping
-    public List<Word> getAllWords() {
+    public ResponseEntity<?> getAllWords() {
+        List<Word> words = wordService.findAll();
 
-        return wordService.findAll();
+        if (words.isEmpty()) {
+
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "There are no words to be found.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return ResponseEntity.ok(words);
+
+        }
     }
 
     @GetMapping("/{id}")
