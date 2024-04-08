@@ -43,9 +43,30 @@ public class WordController {
 
         try {
             Origin foundOrigin = Origin.valueOf(origin.toUpperCase());
-            return new ResponseEntity<>("Found: " + foundOrigin, HttpStatus.OK);
+            List<Word> words = wordService.findWordByOrigin(foundOrigin.toString());
+            if (words.isEmpty()) {
+                return new ResponseEntity<>("There aren't any words found with the origin: '" + origin + "'.", HttpStatus.NOT_FOUND);
+            } else {
+                return ResponseEntity.ok(words);
+            }
         } catch (IllegalArgumentException e){
-            return new ResponseEntity<>("There aren't any words found with the origin: '" + origin + ".", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("There aren't any words found with the origin: '" + origin + ", because this origin does not exist.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/usage/{usage}")
+    public ResponseEntity<?> findWordByUsage(@PathVariable String usage) {
+
+        try {
+            Usage foundUsage = Usage.valueOf(usage.toUpperCase());
+            List<Word> words = wordService.findWordByUsage(foundUsage.toString());
+            if (words.isEmpty()) {
+                return new ResponseEntity<>("There aren't any words found with the usage: '" + usage + "'.", HttpStatus.NOT_FOUND);
+            } else {
+                return ResponseEntity.ok(words);
+            }
+        } catch (IllegalArgumentException e){
+            return new ResponseEntity<>("There aren't any words found with the usage: '" + usage + ", because this usage does not exist.", HttpStatus.NOT_FOUND);
         }
     }
 

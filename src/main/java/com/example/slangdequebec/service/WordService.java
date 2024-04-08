@@ -55,4 +55,8 @@ public class WordService {
     public void deleteById(String id) {
         wordRepository.deleteById(id);
     }
+
+    public List<Word> findWordByUsage(String usage) {
+        return wordRepository.findWordByUsage(usage);
+    }
 }

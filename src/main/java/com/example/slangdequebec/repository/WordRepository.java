@@ -13,4 +13,6 @@ public interface WordRepository extends MongoRepository <Word, String> {
     Word findByWordIgnoreCase(String word);
 
     List<Word> findWordByOrigin(String origin);
+
+    List<Word> findWordByUsage(String usage);
 }
