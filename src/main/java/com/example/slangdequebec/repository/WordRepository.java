@@ -15,4 +15,8 @@ public interface WordRepository extends MongoRepository <Word, String> {
     List<Word> findWordByOrigin(String origin);
 
     List<Word> findWordByUsage(String usage);
+
+    List<Word> findAllByOrderByWordAsc();
+
+    List<Word> findByWordStartingWith(char letter);
 }

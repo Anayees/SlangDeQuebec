@@ -59,4 +59,12 @@ public class WordService {
     public List<Word> findWordByUsage(String usage) {
         return wordRepository.findWordByUsage(usage);
     }
+
+    public List<Word> findWordsFilteredAlphabetically() {
+        return wordRepository.findAllByOrderByWordAsc();
+    }
+
+    public List<Word> findWordsByLetter(char letter) {
+        return wordRepository.findByWordStartingWith(letter);
+    }
 }

@@ -38,7 +38,7 @@ public class WordController {
         }
     }
 
-    @GetMapping("/origin/{origin}")
+    @GetMapping("/filter/origin/{origin}")
     public ResponseEntity<?> findWordByOrigin(@PathVariable String origin) {
 
         try {
@@ -54,7 +54,7 @@ public class WordController {
         }
     }
 
-    @GetMapping("/usage/{usage}")
+    @GetMapping("/filter/usage/{usage}")
     public ResponseEntity<?> findWordByUsage(@PathVariable String usage) {
 
         try {
@@ -67,6 +67,30 @@ public class WordController {
             }
         } catch (IllegalArgumentException e){
             return new ResponseEntity<>("There aren't any words found with the usage: '" + usage + ", because this usage does not exist.", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/filter/filtered-alphabetically")
+    public ResponseEntity<?> findWordsFilteredAlphabetically() {
+        List<Word> words = wordService.findWordsFilteredAlphabetically();
+        if (words.isEmpty()) {
+            return new ResponseEntity<>("No words found.", HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(words);
+        }
+    }
+
+    @GetMapping("/filter/letter/{letter}")
+    public ResponseEntity<?> findWordsByLetter(@PathVariable char letter) {
+        try {
+            List<Word> words = wordService.findWordsByLetter(letter);
+            if (words.isEmpty()) {
+                return new ResponseEntity<>("No words found starting with letter: '" + letter + "'.", HttpStatus.NOT_FOUND);
+            } else {
+                return ResponseEntity.ok(words);
+            }
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Invalid character: '" + letter + "'.", HttpStatus.BAD_REQUEST);
         }
     }
 
