@@ -1,10 +1,8 @@
-package repository;
+package com.example.slangdequebec.repository;
 
-import model.Word;
-import org.bson.internal.BsonUtil;
+import com.example.slangdequebec.model.Word;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -15,4 +13,10 @@ public interface WordRepository extends MongoRepository <Word, String> {
     Word findByWordIgnoreCase(String word);
 
     List<Word> findWordByOrigin(String origin);
+
+    List<Word> findWordByUsage(String usage);
+
+    List<Word> findAllByOrderByWordAsc();
+
+    List<Word> findByWordStartingWith(char letter);
 }

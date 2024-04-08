@@ -1,4 +1,4 @@
-package util;
+package com.example.slangdequebec.util;
 
 public enum Usage {
 

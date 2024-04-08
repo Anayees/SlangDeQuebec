@@ -1,4 +1,4 @@
-package util;
+package com.example.slangdequebec.util;
 
 public enum Origin {
 
@@ -6,4 +6,5 @@ public enum Origin {
     QUEBEC,
     ARABIC,
     CREOLE,
+    VERLAN,
 }

@@ -1,9 +1,9 @@
-package service;
+package com.example.slangdequebec.service;
 
-import model.Word;
+import com.example.slangdequebec.model.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.WordRepository;
+import com.example.slangdequebec.repository.WordRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +14,15 @@ public class WordService {
 
     @Autowired
     private WordRepository wordRepository;
+
+    public Word addWord(Word word) {
+        word.setId(UUID.randomUUID().toString().split("-")[0]);
+        return wordRepository.save(word);
+    }
+
+    public Word findWord(String word) {
+        return wordRepository.findByWord(word);
+    }
 
     public List<Word> findAll() {
         return wordRepository.findAll();
@@ -33,7 +42,29 @@ public class WordService {
     }
 
     public Word save(Word word) {
-        word.setId(UUID.randomUUID().toString().split("-")[0]);
+        if (word.getId() == null) {
+            word.setId(UUID.randomUUID().toString().split("-")[0]);
+        }
         return wordRepository.save(word);
+    }
+
+    public boolean existsById(String id) {
+        return wordRepository.existsById(id);
+    }
+
+    public void deleteById(String id) {
+        wordRepository.deleteById(id);
+    }
+
+    public List<Word> findWordByUsage(String usage) {
+        return wordRepository.findWordByUsage(usage);
+    }
+
+    public List<Word> findWordsFilteredAlphabetically() {
+        return wordRepository.findAllByOrderByWordAsc();
+    }
+
+    public List<Word> findWordsByLetter(char letter) {
+        return wordRepository.findByWordStartingWith(letter);
     }
 }

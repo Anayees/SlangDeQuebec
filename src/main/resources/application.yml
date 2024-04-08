@@ -1,10 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://sdq.prz2nis.mongodb.net/?retryWrites=true&w=majority
-      username: admin
-      password: admin
-      database : SDQ
+      uri: mongodb+srv://admin:admin@sdq.prz2nis.mongodb.net/?retryWrites=true&w=majority&appName=SDQ
+      database: SlangDeQuebec
 
 server:
   port: 8080
